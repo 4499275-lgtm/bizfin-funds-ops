@@ -8,6 +8,11 @@
 - 服务：Fastify + 内置 Web 控制台（静态页，零前端构建）
 - 测试：`node:test`，20 个用例（含与 V2 DEMO 基线一致的场景回归）
 
+![控制台工作台](docs/images/console-dashboard.png)
+
+> 📘 文档：[操作手册（SOP）](docs/操作手册.md) ｜ [接口文档](docs/API.md) ｜ [架构](docs/ARCHITECTURE.md) ｜ [数据模型](docs/DATA-MODEL.md) ｜ [导入导出格式](docs/IMPORT-EXPORT.md) ｜ [规则口径](docs/RULES.md)
+> 上图：控制台工作台 —— 单账户×单日流水、四层结果、异常受理、报表导出。
+
 ## 产品口径（与 V2 基线一致）
 
 平台面向**一个银行账户、一个入账日期**的日终收入勾兑，只处理收入流水，不替代业务系统/ERP/银行/支付公司。
@@ -80,7 +85,7 @@ node dist/src/cli.js webhook-add --db data/funds.db --url https://erp.example.co
 - 模板：`GET /templates/bank.csv` `GET /templates/orders.csv|xlsx`
 - Webhook：`POST /webhooks`（admin）→ `trusted_status.changed` 事件，HMAC-SHA256 签名（`X-BFO-Signature`），`POST /webhooks/flush` 重试投递
 
-完整请求/响应示例见 [docs/API.md](docs/API.md)，架构与数据模型见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) 与 [docs/DATA-MODEL.md](docs/DATA-MODEL.md)，导入导出格式见 [docs/IMPORT-EXPORT.md](docs/IMPORT-EXPORT.md)。
+完整请求/响应示例见 [docs/API.md](docs/API.md)（全量接口参考），架构与数据模型见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) 与 [docs/DATA-MODEL.md](docs/DATA-MODEL.md)，导入导出格式见 [docs/IMPORT-EXPORT.md](docs/IMPORT-EXPORT.md)，日常作业 SOP 见 [docs/操作手册.md](docs/操作手册.md)。
 
 ## 报表导入导出
 
