@@ -1,0 +1,11 @@
+services:
+  funds-ops:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      DB_FILE: /app/data/funds.db
+      PORT: "8787"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

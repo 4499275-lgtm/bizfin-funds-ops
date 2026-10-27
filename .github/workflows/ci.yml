@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Smoke (seed demo + serve + API check)
+        run: |
+          node dist/src/cli.js seed-demo --db data/smoke.db --scene flower
+          node dist/src/cli.js serve --db data/smoke.db --port 8787 &
+          sleep 2
+          curl -sf http://localhost:8787/health
+          curl -sf "http://localhost:8787/api/v1/summary?accountId=ACC-FLOWER&reconDate=2026-08-03" | grep -q '"Closed"'
